@@ -1,0 +1,19 @@
+<!-- templates/base.html -->
+<html>
+<body>
+  {% block heading %}
+    <h1>{{search}}سرچ: </h1>
+      <h1>{{approach}} روش:  </h1>
+  {% endblock heading %}
+  <h2> نتایج</h2>
+  <ul>
+    {% for row in data %}
+      <li>
+        <a href="/foodview/{{ row.1 }}"> {{ row.0 }} </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+</body>
+
+</html>

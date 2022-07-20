@@ -1,0 +1,22 @@
+<!-- templates/base.html -->
+<html>
+<body>
+  {% block heading %}
+    <h1><center></center>{{name}}</h1>
+  {% endblock heading %}
+  <h2> مواد مورد نیاز</h2>
+  <ul>
+    {% for ing in ingredients %}
+      <li>
+        {{ing}}
+      </li>
+    {% endfor %}
+  </ul>
+  <h2> طرز تهیه</h2>
+{{ Preparation }}
+<h2>لینک</h2>
+<a href="{{ url }}">از اینجا با عکس بینید</a>
+
+</body>
+
+</html>

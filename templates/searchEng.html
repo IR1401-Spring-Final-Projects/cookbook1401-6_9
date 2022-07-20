@@ -1,0 +1,27 @@
+<!-- templates/base.html -->
+<html>
+<body>
+  {% block heading %}
+    <h1>جست و جوی غذایی</h1>
+  {% endblock heading %}
+  <input id="search-input" type="text" value="">
+  <button onclick="search_func()">search</button>
+    <select name="approachs" id="approach">
+      <option value="boolean">boolean</option>
+      <option value="tf-idf">tf-idf</option>
+      <option value="transformer">transformer</option>
+      <option value="fast-text">fast-text</option>
+      <option value="elastic-search">elastic-search</option>
+    </select>
+<script>
+function search_func() {
+    var text = document.getElementById("search-input").value;
+    var app = document.getElementById("approach").value;
+    window.location.href='/show-results/'+app+'/'+text
+}
+</script>
+
+</body>
+
+</html>
+
