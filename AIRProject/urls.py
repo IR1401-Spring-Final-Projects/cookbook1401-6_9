@@ -19,6 +19,7 @@ import searchEng, FoodView
 
 urlpatterns = [
     path('searchEng/', include('searchEng.urls')),
+    path('', include('searchEng.urls')),
     path('foodview/', include('FoodView.urls')),
     path('admin/', admin.site.urls),
     path('show-results/', include('ShowResults.urls')),

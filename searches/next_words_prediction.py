@@ -9,12 +9,16 @@ def preprocess():
 
 
 def complete_with_many_mask(text, mask_num):
+    sentence_end=" را میتوان خورد."
     while mask_num > 0:
         if mask_num > 1:
-            next_word = unmasker(text + " [MASK] " * mask_num)[0][0]['token_str']
+            list = unmasker(text + " [MASK] " * mask_num + sentence_end)[0]
         else:
-            next_word = unmasker(text + " [MASK] " * mask_num)[0]['token_str']
-        text += " " + next_word
+            list = unmasker(text + " [MASK] " * mask_num + sentence_end)
+        for option in list:
+            if option['token_str'] not in text.split():
+                text += " " + option['token_str']
+                break
         mask_num -= 1
     return text
 

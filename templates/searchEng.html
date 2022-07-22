@@ -4,7 +4,7 @@
 {% block heading %}
 <h1>جست و جوی غذایی</h1>
 {% endblock heading %}
-<input id="search-input" type="text" value="{{ text }}" onkeydown="list_update()">
+<input id="search-input" type="text" value="{{ text }}" onkeyup="list_update()">
 <button onclick="search_func()">search</button>
 <select name="approachs" id="approach">
     <option value="boolean">boolean</option>
