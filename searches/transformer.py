@@ -17,29 +17,22 @@ model = None
 
 
 def transformer_normalize(text):
-    tokenized_text = tokenizer.tokenize(text)
-    indexed_tokens = tokenizer.convert_tokens_to_ids(tokenized_text)
-
-    segments_ids = [1] * len(tokenized_text)
-    # Convert inputs to PyTorch tensors
-    tokens_tensor = torch.tensor([indexed_tokens]).to(device)
-    segments_tensors = torch.tensor([segments_ids]).to(device)
-    return tokens_tensor, segments_tensors
+    return text.split()
 
 
 def transformer_to_text(food):
-    t, s = transformer_normalize(food['name'])
-    yield 10, t, s
+    t = transformer_normalize(food['name'])
+    yield 10, t
 
     for i in food['tags']:
-        t, s = transformer_normalize(i)
-        yield 7, t, s
+        t = transformer_normalize(i)
+        yield 7, t
     for i in food['ingredients']:
-        t, s = transformer_normalize(i)
-        yield 5, t, s
+        t = transformer_normalize(i)
+        yield 1, t
 
-    t, s = transformer_normalize(food['Preparation'])
-    yield 1, t, s
+    t = transformer_normalize(food['Preparation'])
+    yield 5, t
     return
 
 
@@ -51,8 +44,7 @@ def get_transformer_score(id, vec):
 
 
 def search_transformer_text(text):
-    tokens_tensor, segments_tensors = transformer_normalize(text)
-    search_pooler_output = model(tokens_tensor, segments_tensors)[1]
+    search_pooler_output = model(**(tokenizer(text, return_tensors='pt')))[1]
     scores = [0] * len(all_foods)
     for id, food in enumerate(all_foods):
         scores[id] = (get_transformer_score(id, search_pooler_output), id)
@@ -72,9 +64,9 @@ def preprocess():
     device = "cpu"
     # v3.0
     model_name = "HooshvareLab/bert-fa-base-uncased" # "HooshvareLab/bert-fa-zwnj-base"
-    config = AutoConfig.from_pretrained(model_name)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModel.from_pretrained(model_name).to(device)
+    config = BertConfig.from_pretrained(model_name)
+    tokenizer = BertTokenizer.from_pretrained(model_name)
+    model = BertModel.from_pretrained(model_name).to(device)
     model.eval()
 
     # Run the text through BERT, and collect all of the hidden states produced
@@ -86,13 +78,11 @@ def preprocess():
             l = 0
             cnt = 0
             sum = None
-            for imp, tokens_tensor, segments_tensor in transformer_to_text(food):
-                while l < tokens_tensor.shape[1]:
-                    r = min(tokens_tensor.shape[1], l + 300)
-                    tokens_tensor_part = tokens_tensor[:, l:r]
-                    segments_tensor_part = segments_tensor[:, l:r]
+            for imp, text in transformer_to_text(food):
+                while l < len(text):
+                    r = min(len(text), l + 300)
                     # print(tokens_tensor_part.shape, segments_tensors_part.shape)
-                    pooler_output = model(tokens_tensor_part, segments_tensor_part)[1]
+                    pooler_output = model(**(tokenizer(" ".join(text[l:r]), return_tensors='pt')))[1]
                     if sum is None:
                         sum = pooler_output * imp
                     else:
