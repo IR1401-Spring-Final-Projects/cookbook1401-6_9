@@ -22,4 +22,6 @@ urlpatterns = [
     path('foodview/', include('FoodView.urls')),
     path('admin/', admin.site.urls),
     path('show-results/', include('ShowResults.urls')),
+    path('next_words/', include('NextWords.urls'))
+
 ]

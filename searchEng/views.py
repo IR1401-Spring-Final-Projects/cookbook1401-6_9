@@ -5,4 +5,4 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 def index(request):
-    return render(request, "searchEng.html")
+    return render(request, "searchEng.html",{"text": "", "options": [""]*5, "search": "boolean"})
