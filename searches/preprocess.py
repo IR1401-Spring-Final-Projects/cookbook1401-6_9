@@ -43,7 +43,7 @@ def download_foods():
 
 
 def normalize_foods():
-    f = open("searches/WIKIpuredata.json", encoding="utf-8")
+    f = open("searches/data/WIKIpuredata.json", encoding="utf-8")
     all_wikis = [x for x in json.load(f)]
     f.close()
     for i in tqdm.tqdm(range(len(all_wikis)), leave=False):
@@ -51,7 +51,7 @@ def normalize_foods():
                                              remove_tags(all_wikis[i]['Preparation']))
         all_wikis[i]['ingredients'] = [re.sub("=", "", remove_tags(y)) for y in all_wikis[i]['ingredients']]
 
-    f = open("searches/MamyFoodpuredata.json", encoding="utf-8")
+    f = open("searches/data/MamyFoodpuredata.json", encoding="utf-8")
     all_mamy = [x for x in json.load(f)]
     f.close()
     all_mamy = [x for x in all_mamy if x['main_group'] not in ['مقالات', 'آموزش آشپزی تصویری', 'تزئینات غذا']]
@@ -64,7 +64,7 @@ def normalize_foods():
         all_wikis[i]['source'] = "WikiPedia"
     all_wikis = [x for x in all_wikis if len(x['Preparation'].rstrip().lstrip()) > 5]
     global all_foods
-    all_foods = all_wikis #+ all_mamy
+    all_foods = all_wikis + all_mamy
     print(len(all_foods))
     return
 
@@ -75,6 +75,6 @@ def preprocess_all_searches():
     stemmer = Stemmer()
     r = requests.get("https://raw.githubusercontent.com/sobhe/hazm/master/hazm/data/stopwords.dat",
                      allow_redirects=True)
-    open('stopwords.txt', 'wb').write(r.content)
-    stopwords = [normalizer.normalize(x.strip()) for x in codecs.open('stopwords.txt', 'r', 'utf-8').readlines()]
+    open('searches/data/stopwords.txt', 'wb').write(r.content)
+    stopwords = [normalizer.normalize(x.strip()) for x in codecs.open('searches/data/stopwords.txt', 'r', 'utf-8').readlines()]
     stopwords += ["(", ")", "،", ".", ":", "؛"]

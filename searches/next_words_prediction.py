@@ -1,5 +1,4 @@
 from transformers import pipeline
-
 from searches.preprocess import get_stopwords
 
 unmasker = None

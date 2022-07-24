@@ -2,9 +2,9 @@
 /fasttext_model_cbow.bin
 /db.sqlite3
 /stopwords.txt
-/searches/WIKIpuredata.json
+/searches/data/WIKIpuredata.json
 /searches/TransformerVecs.tar.gz
-/searches/stopwords.txt
-/searches/MamyFoodpuredata.json
-/searches/fasttext_model_cbow.bin
-/searches/fasttext_food_normalized.txt
+/searches/data/stopwords.txt
+/searches/data/MamyFoodpuredata.json
+/searches/data/fasttext_model_cbow.bin
+/searches/data/fasttext_food_normalized.txt

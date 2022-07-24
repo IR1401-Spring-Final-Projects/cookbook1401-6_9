@@ -64,7 +64,7 @@ def preprocess():
         all_food_text += ' '.join(str(t) for t in simple_food)
         all_food_text += '\n\n'
 
-    with open('fasttext_food_normalized.txt', 'w', encoding="utf-8") as f:
+    with open('data/fasttext_food_normalized.txt', 'w', encoding="utf-8") as f:
         f.write(all_food_text)
 
     dim = 150  # default: 100
@@ -76,7 +76,7 @@ def preprocess():
     model = fasttext.train_unsupervised('fasttext_food_normalized.txt', model='cbow', dim=dim, lr=lr)
     model.save_model("fasttext_model_cbow.bin")
 
-    model = fasttext.load_model("fasttext_model_cbow.bin")
+    model = fasttext.load_model("data/fasttext_model_cbow.bin")
     # model = fasttext.load_model("fasttext_model_cbow_-Preparation.bin")
     all_food_vectors = {}
     for index, food in enumerate(tqdm.tqdm(all_foods)):
