@@ -1,3 +1,5 @@
+import ast
+
 import tqdm
 from hazm import *
 import math
@@ -5,9 +7,7 @@ import math
 from searches.boolean import boolian_normalize
 from searches.preprocess import get_K, get_stopwords, get_all_foods
 
-tf_word_accur = {}
-tf_word_count = {}
-idf_word = {}
+
 tfidf = {}
 
 normalizer = Normalizer()
@@ -18,28 +18,37 @@ all_foods = None
 
 
 def preprocess():
-    global tfidf, idf_word, tf_word_accur, tf_word_count, stopwords, all_foods, K
+    global tfidf, stopwords, all_foods, K
+
     all_foods = get_all_foods()
     stopwords = get_stopwords()
     K = get_K()
+    with open("searches/data/tfidf.txt", "r", encoding="utf-8") as read_file:
+        tfidf = ast.literal_eval(read_file.read())
 
-    for id, i in enumerate(tqdm.tqdm(all_foods)):
-        doc = td_to_text(i)
-        tf_word_count[id] = len(doc)
-        for w in doc:
-            if w not in tf_word_accur:
-                tf_word_accur[w] = {}
-            if id not in tf_word_accur[w]:
-                tf_word_accur[w][id] = 0
-            tf_word_accur[w][id] += 1
-
-    for w in tf_word_accur.keys():
-        for id in tf_word_accur[w].keys():
-            tf_word_accur[w][id] /= tf_word_count[id]
-        idf_word[w] = 1 + math.log(len(all_foods) / len(tf_word_accur[w]))
-        tfidf[w] = {}
-        for id in tf_word_accur[w].keys():
-            tfidf[w][id] = tf_word_accur[w][id] * idf_word[w]
+    # tf_word_accur = {}
+    # tf_word_count = {}
+    # idf_word = {}
+    # for id, i in enumerate(tqdm.tqdm(all_foods)):
+    #     doc = td_to_text(i)
+    #     tf_word_count[id] = len(doc)
+    #     for w in doc:
+    #         if w not in tf_word_accur:
+    #             tf_word_accur[w] = {}
+    #         if id not in tf_word_accur[w]:
+    #             tf_word_accur[w][id] = 0
+    #         tf_word_accur[w][id] += 1
+    #
+    # for w in tf_word_accur.keys():
+    #     for id in tf_word_accur[w].keys():
+    #         tf_word_accur[w][id] /= tf_word_count[id]
+    #     idf_word[w] = 1 + math.log(len(all_foods) / len(tf_word_accur[w]))
+    #     tfidf[w] = {}
+    #     for id in tf_word_accur[w].keys():
+    #         tfidf[w][id] = tf_word_accur[w][id] * idf_word[w]
+    #
+    # with open("searches/data/tfidf.txt", "w", encoding="utf-8") as write_file:
+    #     write_file.write(str(tfidf))
 
 
 def td_normalize(text):

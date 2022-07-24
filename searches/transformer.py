@@ -45,7 +45,7 @@ def preprocess():
     K = get_K()
     model = bert_bone.get_model()
     tokenizer = bert_bone.get_tokenizer()
-    vecs = torch.load("searches/embed.pt")
+    vecs = torch.load("searches/data/embed.pt")
 
 
 # def transformer_normalize(text):

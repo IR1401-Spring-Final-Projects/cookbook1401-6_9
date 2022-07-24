@@ -1,3 +1,6 @@
+import ast
+import json
+
 import tqdm
 from hazm import *
 
@@ -8,7 +11,7 @@ normalizer = Normalizer()
 stemmer = Stemmer()
 stopwords = None
 K = None
-all_foods=None
+all_foods = None
 
 
 def boolian_normalize(text):
@@ -31,13 +34,17 @@ def preprocess():
     all_foods = get_all_foods()
     stopwords = get_stopwords()
     K = get_K()
-    boolian_word_accur = {}
-    for id, i in enumerate(tqdm.tqdm(all_foods)):
-        doc = boolian_to_text(i)
-        for w in doc:
-            if w not in boolian_word_accur:
-                boolian_word_accur[w] = set()
-            boolian_word_accur[w].add(id)
+    with open("searches/data/boolean.txt", "r", encoding="utf-8") as read_file:
+        boolian_word_accur = ast.literal_eval(read_file.read())
+
+    # for id, i in enumerate(tqdm.tqdm(all_foods)):
+    #     doc = boolian_to_text(i)
+    #     for w in doc:
+    #         if w not in boolian_word_accur:
+    #             boolian_word_accur[w] = set()
+    #         boolian_word_accur[w].add(id)
+    # with open("searches/data/boolean.txt", "w", encoding="utf-8") as write_file:
+    #     write_file.write(str(boolian_word_accur))
 
 
 def get_boolian_score(id, text):
