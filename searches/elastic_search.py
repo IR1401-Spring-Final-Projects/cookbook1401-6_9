@@ -1,6 +1,8 @@
 import json
 
 from hazm import *
+from tqdm import tqdm
+
 from searches.preprocess import get_K, get_stopwords, get_all_foods
 from elasticsearch import Elasticsearch
 
@@ -9,13 +11,56 @@ normalizer = Normalizer()
 stemmer = Stemmer()
 stopwords = None
 K = None
-all_foods = None
+all_foods = get_all_foods()
 
 host = 'https://127.0.0.1:9200'
+ELASTIC_PASSWORD = ''
+
+es = Elasticsearch(
+    host,
+    ca_certs="http_ca.crt",
+    basic_auth=("elastic", ELASTIC_PASSWORD)
+)
 
 
 def search_text(text):
-    pass
+    res = es.search(index='test-index', query={
+        "function_score": {
+            "query": {
+                "multi_match": {
+                    "fields": ["tags", "ingredients", 'name'],
+                    "query": text,
+                    "fuzziness": "AUTO",
+                },
+            },
+            "boost": "5",
+            "functions": [
+                {
+                    "filter": {'match': {'name': text}},
+                    "weight": 42
+                },
+                {
+                    "filter": {
+                        "multi_match": {
+                            "fields": ["tags", "ingredients"],
+                            "query": text,
+                        }
+                    },
+                    "weight": 40
+                },
+            ],
+            "max_boost": 42,
+            "score_mode": "max",
+            "boost_mode": "multiply",
+            "min_score": 30
+        },
+    })
+    all_hits = res.get("hits").get('hits')
+    res = []
+    for hit in all_hits:
+        res.append((hit.get("_score"), int(hit.get("_id"))))
+
+    return res
 
 
 def preprocess():
@@ -23,20 +68,8 @@ def preprocess():
     all_foods = get_all_foods()
     stopwords = get_stopwords()
     K = get_K()
-    es = Elasticsearch(
-        host,
-    )
 
-    wiki_data = open('WIKIpuredata.json', 'r')
-    mamy_data = open('MamyFoodpuredata.json', 'r')
+    all_foods = get_all_foods()
 
-    # todo: do hazm pre-process on data?
-    all_wiki = [x for x in json.load(wiki_data)]
-    all_mamy = [x for x in json.load(mamy_data)]
-
-    for index, x in enumerate(all_wiki):
-        es.index(index="test-wiki-index", id=index + 1, document=x)
-    for index, x in enumerate(all_mamy):
-        es.index(index="test-mamy-index", id=index + 1, document=x)
-
-    # todo: for search implement: es.search(index="test-{wiki | mamy}-index", query={"match_all": {}})
+    for index, x in tqdm(enumerate(all_foods)):
+        es.index(index="test-index", id=str(index), document=x)
