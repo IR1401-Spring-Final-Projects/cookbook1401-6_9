@@ -50,8 +50,7 @@ def search_transformer_text(text):
     fast_scores = cos(search_pooler_output, vecs)
     scores = [0] * len(all_foods)
     for id, food in enumerate(all_foods):
-        scores[id] = (get_transformer_score(id, search_pooler_output), id)
-    print(fast_scores[:10], scores[:10])
+        scores[id] = (fast_scores[id], id)
     scores = list(reversed(sorted(scores)[-K:]))
     rank = []
     for score, id in scores:
