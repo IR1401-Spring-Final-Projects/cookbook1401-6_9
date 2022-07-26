@@ -21,6 +21,11 @@ def index(request, approach, text):
     else:
         raise ValueError
 
-    names = [all_foods[id]['name'] for score, id in rank]
-    ids = [id for score, id in rank]
+    if approach != "classification":
+        names = [all_foods[id]['name'] for score, id in rank]
+        ids = [id for score, id in rank]
+    else:
+        names = [rank]
+        ids = [0]
+
     return render(request, "show_result.html", {"data": zip(names, ids), "search": text, "approach": approach})
