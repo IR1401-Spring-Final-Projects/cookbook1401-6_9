@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from searches import tfidf, boolean, transformer, fasttext_search, elastic_search, classification
+from searches import tfidf, boolean, transformer, fasttext_search, elastic_search, classification, clustering
 from searches.preprocess import all_foods
 
 
@@ -15,7 +15,7 @@ def index(request, approach, text):
     elif approach == "elastic-search":
         rank = elastic_search.search_text(text)
     elif approach == "clustering":
-        rank = fasttext_search.search_fasttext_text(text)
+        rank = clustering.get_cluster(text)
     elif approach == "classification":
         rank = classification.classify_transformer_text(text)
     else:

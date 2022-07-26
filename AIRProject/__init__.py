@@ -1,5 +1,5 @@
 from searches import fasttext_search, preprocess, boolean, tfidf, transformer, next_words_prediction, elastic_search, \
-    bert_bone
+    bert_bone, clustering
 
 # todo: write commands for preprocesses
 # preprocess.download_foods()
@@ -21,4 +21,6 @@ print("fasttext preprocess end/ elastic search preprocess start")
 # elastic_search.preprocess()
 print("elastic search preprocess end/next words prediction preprocess start")
 next_words_prediction.preprocess()
-print("next word prediction end")
+print("next word prediction end/ clustering start")
+clustering.preprocess()
+print("clustering end")

@@ -28,11 +28,13 @@
     <input id="search-input" type="text" value="{{ text }}" onkeyup="list_update()" class="form-control">
     <button class="btn btn-primary mx-2" onclick="search_func()">جست‌جو</button>
     <select name="approachs" id="approach" class="form-select">
+        <option value="transformer">transformer</option>
         <option value="boolean">boolean</option>
         <option value="tf-idf">tf-idf</option>
-        <option value="transformer">transformer</option>
         <option value="fast-text">fast-text</option>
         <option value="elastic-search">elastic-search</option>
+        <option value="clustering">clustering</option>
+        <option value="classification">classification</option>
     </select>
 </div>
 <ul id="nextwords" class="list-group mt-3 justify-center align-items-center px-5">
