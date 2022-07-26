@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from searches import tfidf, boolean, transformer, fasttext_search, elastic_search, classification, clustering
 from searches.preprocess import all_foods
+from searches.spell_correction import correct_spelling
 
 
 def index(request, approach, text):
+    text = ' '.join(correct_spelling(word) for word in text.split())
     if approach == "boolean":
         rank = boolean.search_boolian_text(text)
     elif approach == "tf-idf":

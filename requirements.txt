@@ -1,0 +1,12 @@
+Django==3.2.14
+torch
+hazm
+numpy
+fasttext
+tqdm
+gdown
+w3lib
+transformers
+elasticsearch
+scikit-learn==1.0.2
+ipython
