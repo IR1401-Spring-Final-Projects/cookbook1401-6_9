@@ -48,7 +48,9 @@ categories are:
 </ul>
 
 ## elastic_search (ehsan)
-
+در ابتدا پیش‌پردازش را برا روی داده‌ها انجام می‌دهیم و سپس آن‌ها را در ایندکسی در دیتابیس الستیک ذخیره می‌کنیم.
+برای سرچ نیز وزن بیشتری به نام غذا می‌دهیم و وزن کمتری را برای تگ‌ها و مواد اولیه در‌نظر میگیریم.
+در اصل از روش function_score در الستیک استفاده کردیم. 
 
 ## next words prediction
 by getting a text it tries to find a query for users.
