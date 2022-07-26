@@ -178,20 +178,21 @@ class UniformEditProbabilityModel:
         else:
             return math.log(1 - self.edit_prob)
 
+csp: CandidateScorer = None
 
 def preprocess():
-    global cs
+    global csp
     lm = LanguageModel()
     epm = UniformEditProbabilityModel()
     cg = CandidateGenerator(lm, epm)
-    cs = CandidateScorer(lm, cg, mu=1.0)
+    csp = CandidateScorer(lm, cg, mu=1.0)
 
 
-cs: CandidateScorer = None
+
 
 
 def correct_spelling(query) -> str:
-    return cs.correct_spelling(query)
+    return csp.correct_spelling(query)
 
 
 def correct_spelling_candidates(query) -> List[str]:
