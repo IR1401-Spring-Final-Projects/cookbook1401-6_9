@@ -54,8 +54,6 @@ def classify_transformer_text(text):
     batch_x[1] = vec
     output = trained_classifier(batch_x)
     output = torch.argmax(output, 1)[0].item()
-    print(output)
-    output = output[0]
     for label in main_group_to_label.keys():
         if main_group_to_label[label] == output:
             return label

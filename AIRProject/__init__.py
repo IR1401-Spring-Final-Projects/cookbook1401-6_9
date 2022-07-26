@@ -1,6 +1,6 @@
 from searches import (
     fasttext_search, preprocess, boolean, tfidf, transformer, next_words_prediction, elastic_search,
-    bert_bone, clustering, spell_correction,
+    bert_bone, clustering, spell_correction, classification
 )
 
 # todo: write commands for preprocesses
@@ -28,3 +28,4 @@ next_words_prediction.preprocess()
 print("next word prediction end/ clustering start")
 clustering.preprocess()
 print("clustering end")
+classification.preprocess()
