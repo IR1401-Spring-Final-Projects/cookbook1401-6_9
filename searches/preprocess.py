@@ -22,8 +22,10 @@ K = 10
 def get_stopwords():
     return stopwords
 
+
 def get_all_foods():
     return all_foods
+
 
 def get_K():
     return K
@@ -47,8 +49,10 @@ def normalize_foods():
     all_wikis = [x for x in json.load(f)]
     f.close()
     for i in tqdm.tqdm(range(len(all_wikis)), leave=False):
-        all_wikis[i]['Preparation'] = re.sub("مواد لازم:|طرز تهیه:|طرزتهیه|روش تهیه:|دستور پخت:", "",
-                                             remove_tags(all_wikis[i]['Preparation']))
+        all_wikis[i]['Preparation'] = re.sub(
+            "مواد لازم:|طرز تهیه:|طرزتهیه|روش تهیه:|دستور پخت:", "",
+            remove_tags(all_wikis[i]['Preparation'])
+        )
         all_wikis[i]['ingredients'] = [re.sub("=", "", remove_tags(y)) for y in all_wikis[i]['ingredients']]
 
     f = open("searches/data/MamyFoodpuredata.json", encoding="utf-8")
@@ -73,8 +77,12 @@ def preprocess_all_searches():
     global normalizer, stemmer, stopwords
     normalizer = Normalizer()
     stemmer = Stemmer()
-    r = requests.get("https://raw.githubusercontent.com/sobhe/hazm/master/hazm/data/stopwords.dat",
-                     allow_redirects=True)
+    r = requests.get(
+        "https://raw.githubusercontent.com/sobhe/hazm/master/hazm/data/stopwords.dat",
+        allow_redirects=True
+    )
     open('searches/data/stopwords.txt', 'wb').write(r.content)
-    stopwords = [normalizer.normalize(x.strip()) for x in codecs.open('searches/data/stopwords.txt', 'r', 'utf-8').readlines()]
+    stopwords = [normalizer.normalize(x.strip()) for x in
+                 codecs.open('searches/data/stopwords.txt', 'r', 'utf-8').readlines()]
     stopwords += ["(", ")", "،", ".", ":", "؛"]
+    print(normalizer)

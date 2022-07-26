@@ -1,5 +1,7 @@
-from searches import fasttext_search, preprocess, boolean, tfidf, transformer, next_words_prediction, elastic_search, \
-    bert_bone, clustering
+from searches import (
+    fasttext_search, preprocess, boolean, tfidf, transformer, next_words_prediction, elastic_search,
+    bert_bone, clustering, spell_correction,
+)
 
 # todo: write commands for preprocesses
 # preprocess.download_foods()
@@ -7,7 +9,9 @@ print("normalize foods start")
 preprocess.normalize_foods()
 print("normalize foods end/ preprocess all searches start")
 preprocess.preprocess_all_searches()
-print("preprocess all searches end/ load bert start")
+print("preprocess all searches end/ spell correction start")
+spell_correction.preprocess()
+print("spell correction end/ load bert start")
 bert_bone.load_pars_bert()
 print("load bert finished/ boolean preprocess start")
 boolean.preprocess()

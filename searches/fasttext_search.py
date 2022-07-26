@@ -1,4 +1,5 @@
 import ast
+import os
 
 import torch
 import tqdm
@@ -70,12 +71,14 @@ def train():
     model = fasttext.train_unsupervised('searches/data/fasttext_food_normalized.txt', model='cbow', dim=dim, lr=lr)
     model.save_model("searches/data/fasttext_model_cbow.bin")
 
+
 def preprocess():
     global all_food_vectors, model, stopwords, all_foods, K
     all_foods = get_all_foods()
     stopwords = get_stopwords()
     K = get_K()
-    train()
+    if not os.path.exists('searches/data/fasttext_model_cbow.bin'):
+        train()
     model = fasttext.load_model("searches/data/fasttext_model_cbow.bin")
     all_food_vectors = np.load("searches/data/all_food_vectors.npy")
     # all_food_vectors = np.zeros((len(all_foods), dim))
