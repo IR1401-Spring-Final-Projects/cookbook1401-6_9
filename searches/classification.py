@@ -129,3 +129,4 @@ def preprocess():
     # train_model(training_set, dev_set)
     trained_classifier = NN()
     trained_classifier.load_state_dict(torch.load("searches/data/classifier.pt"))
+    evaluate(dev_set, trained_classifier)
