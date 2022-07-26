@@ -116,7 +116,7 @@ def preprocess():
     global vecs, model, all_foods, K, trained_classifier
     all_foods = get_all_foods()
     model = bert_bone.get_model()
-    vecs = torch.load("searches/data/embed.pt")
+    vecs = torch.load("searches/data/embedclas.pt")
     with_label = []
     for i, food in enumerate(all_foods):
         if "main_group" in food and food["main_group"] != 'مقالات ':
