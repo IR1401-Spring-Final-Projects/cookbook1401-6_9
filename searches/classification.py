@@ -126,6 +126,6 @@ def preprocess():
     random.shuffle(with_label)
     training_set = with_label[:int(0.9 * n)]
     dev_set = with_label[int(0.9 * n):]
-    train_model(training_set, dev_set)
+    # train_model(training_set, dev_set)
     trained_classifier = NN()
     trained_classifier.load_state_dict(torch.load("searches/data/classifier.pt"))
