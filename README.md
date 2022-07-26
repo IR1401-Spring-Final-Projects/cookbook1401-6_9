@@ -36,7 +36,7 @@ searches from HW3
 we use transformer as word2vec model this time and improve our results. 
 by searching a text with this approach, system will initially search by transformer and concat the highest score food with 100 random food from its cluster. 
 
-## classification
+## classification (Ali)
 we use transformer as word2vec model and train a decision tree on top, to classify foods in 5 different category. 
 categories are: 
 <ul>
@@ -47,7 +47,15 @@ categories are:
 <li> ساندویچ، پیتزا و ماکارونی،پاستا</li>
 </ul>
 
-## elastic_search
+## elastic_search (ehsan)
+
+
+## next words prediction
+by getting a text it tries to find a query for users.
+### typo (Mahdi)
+
+### word prediction
+we use ParsBert. it could predict masks words. we concat several [mask] sign to the text and then concat "را میتوان خورد". then use bert to predict missing words which usually ended up being food. 
 
 ## preprocess 
 it will preprocess food and normalizing them.
