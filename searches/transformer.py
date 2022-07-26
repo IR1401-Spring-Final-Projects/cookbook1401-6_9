@@ -22,6 +22,13 @@ def transformer_normalize(text):
     return tokens_tensor, segments_tensors
 
 
+
+def transformer_to_text_classification(food):
+    t, s = transformer_normalize(food['name'])
+    yield 1, t, s
+    return
+
+
 def transformer_to_text(food):
     t, s = transformer_normalize(food['name'])
     yield 10, t, s

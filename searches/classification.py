@@ -73,7 +73,7 @@ def evaluate(dev_set, classifier):
         batch_y[i] = all_foods[r]["label"]
     output = classifier(batch_x)
     output = torch.argmax(output, 1)
-    print("dev set accuracy:", (torch.sum(output == batch_y) / n).item())
+    print("dev set accuracy:", (torch.sum(output == batch_y) / 100).item())
     classifier.train()
 
 
