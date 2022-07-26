@@ -3,10 +3,10 @@ Persian cookbook
 
 # django related folders
 ## AIRProject 
-its __init__.py run preprocesses and it is root of django project which indicate url patterns.
+its `__init__.py` run preprocesses and it is root of django project which indicate url patterns.
 
 ## FoodView 
-convert food to a html file. all urls like /FoodView/47 ended up being handled by this part.
+convert food to a html file. all urls like `/FoodView/47` ended up being handled by this part.
 
 ## NextWords 
 this part help to predict next words in the search bar.
@@ -55,7 +55,7 @@ by getting a text it tries to find a query for users.
 ### typo (Mahdi)
 
 ### word prediction
-we use ParsBert. it could predict masks words. we concat several [mask] sign to the text and then concat "را میتوان خورد". then use bert to predict missing words which usually ended up being food. 
+we use ParsBert. it could predict masks words. we concat several [mask] sign to the text and then concat `"را میتوان خورد"`. then use bert to predict missing words which usually ended up being food. 
 
 ## preprocess 
 it will preprocess food and normalizing them.
