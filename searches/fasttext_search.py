@@ -1,3 +1,6 @@
+import ast
+
+import torch
 import tqdm
 from hazm import *
 import numpy as np
@@ -10,7 +13,7 @@ stemmer = Stemmer()
 stopwords = None
 K = None
 all_foods = None
-all_food_vectors, model= None, None
+all_food_vectors, model = None, None
 
 
 def fasttext_normalize(text):
@@ -53,36 +56,37 @@ def search_fasttext_text(text):
 
 
 def preprocess():
-    global all_food_vectors, model , stopwords, all_foods, K
+    global all_food_vectors, model, stopwords, all_foods, K
     all_foods = get_all_foods()
     stopwords = get_stopwords()
     K = get_K()
 
-    all_food_text = ''
-    for index, food in enumerate(tqdm.tqdm(all_foods)):
-        simple_food = fasttext_to_text(food)
-        all_food_text += ' '.join(str(t) for t in simple_food)
-        all_food_text += '\n\n'
-
-    with open('data/fasttext_food_normalized.txt', 'w', encoding="utf-8") as f:
-        f.write(all_food_text)
-
+    # all_food_text = ''
+    # for index, food in enumerate(tqdm.tqdm(all_foods)):
+    #     simple_food = fasttext_to_text(food)
+    #     all_food_text += ' '.join(str(t) for t in simple_food)
+    #     all_food_text += '\n\n'
+    #
+    # with open('data/fasttext_food_normalized.txt', 'w', encoding="utf-8") as f:
+    #     f.write(all_food_text)
+    #
     dim = 150  # default: 100
-    lr = 0.05  # default: 0.05
+    # lr = 0.05  # default: 0.05
+    #
+    #
+    # train_model = False
+    #
+    # model = fasttext.train_unsupervised('fasttext_food_normalized.txt', model='cbow', dim=dim, lr=lr)
+    # model.save_model("fasttext_model_cbow.bin")
 
-
-    train_model = False
-
-    model = fasttext.train_unsupervised('fasttext_food_normalized.txt', model='cbow', dim=dim, lr=lr)
-    model.save_model("fasttext_model_cbow.bin")
-
-    model = fasttext.load_model("data/fasttext_model_cbow.bin")
-    # model = fasttext.load_model("fasttext_model_cbow_-Preparation.bin")
-    all_food_vectors = {}
-    for index, food in enumerate(tqdm.tqdm(all_foods)):
-        simple_food = fasttext_to_text(food)
-        final_vec = np.array([0] * dim, 'float64')
-        for text in simple_food:
-            final_vec += model.get_word_vector(text)
-        final_vec /= len(simple_food)
-        all_food_vectors[index] = final_vec
+    model = fasttext.load_model("searches/data/fasttext_model_cbow.bin")
+    all_food_vectors = np.load("searches/data/all_food_vectors.npy")
+    # all_food_vectors = np.zeros((len(all_foods), dim))
+    # for index, food in enumerate(tqdm.tqdm(all_foods)):
+    #     simple_food = fasttext_to_text(food)
+    #     final_vec = np.array([0] * dim, 'float64')
+    #     for text in simple_food:
+    #         final_vec += model.get_word_vector(text)
+    #     final_vec /= len(simple_food)
+    #     all_food_vectors[index] = final_vec
+    # np.save("searches/data/all_food_vectors.npy", all_food_vectors)
