@@ -54,31 +54,28 @@ def search_fasttext_text(text):
         rank.append((score, id))
     return rank
 
-
-def preprocess():
-    global all_food_vectors, model, stopwords, all_foods, K
-    all_foods = get_all_foods()
-    stopwords = get_stopwords()
-    K = get_K()
-
+def train():
     # all_food_text = ''
     # for index, food in enumerate(tqdm.tqdm(all_foods)):
     #     simple_food = fasttext_to_text(food)
     #     all_food_text += ' '.join(str(t) for t in simple_food)
     #     all_food_text += '\n\n'
     #
-    # with open('data/fasttext_food_normalized.txt', 'w', encoding="utf-8") as f:
+    # with open('searches/data/fasttext_food_normalized.txt', 'w', encoding="utf-8") as f:
     #     f.write(all_food_text)
-    #
-    dim = 150  # default: 100
-    # lr = 0.05  # default: 0.05
-    #
-    #
-    # train_model = False
-    #
-    # model = fasttext.train_unsupervised('fasttext_food_normalized.txt', model='cbow', dim=dim, lr=lr)
-    # model.save_model("fasttext_model_cbow.bin")
 
+    dim = 150  # default: 100
+    lr = 0.05  # default: 0.05
+
+    model = fasttext.train_unsupervised('searches/data/fasttext_food_normalized.txt', model='cbow', dim=dim, lr=lr)
+    model.save_model("searches/data/fasttext_model_cbow.bin")
+
+def preprocess():
+    global all_food_vectors, model, stopwords, all_foods, K
+    all_foods = get_all_foods()
+    stopwords = get_stopwords()
+    K = get_K()
+    train()
     model = fasttext.load_model("searches/data/fasttext_model_cbow.bin")
     all_food_vectors = np.load("searches/data/all_food_vectors.npy")
     # all_food_vectors = np.zeros((len(all_foods), dim))
