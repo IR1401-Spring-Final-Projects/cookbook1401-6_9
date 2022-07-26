@@ -56,6 +56,13 @@ categories are:
 by getting a text it tries to find a query for users.
 ### typo (Mahdi)
 
+A language model is created and used for probability of words.
+
+For each input query, all corpus words having edit distance at most 2 are generated.
+Then the most probable one (according to language model and edit probability) is chosen as the result.
+
+This spell corrected word is suggested and used in all searches.
+
 ### word prediction
 we use ParsBert. it could predict masks words. we concat several [mask] sign to the text and then concat `"را میتوان خورد"`. then use bert to predict missing words which usually ended up being food. 
 
