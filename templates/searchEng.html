@@ -20,7 +20,7 @@
             crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="px-4">
 {% block heading %}
     <h1>جست و جوی غذایی</h1>
 {% endblock heading %}
@@ -39,7 +39,7 @@
 </div>
 <ul id="nextwords" class="list-group mt-3 justify-center align-items-center px-5">
     {% for option in options %}
-        <li class="list-group-item">
+        <li class="list-group-item w-100">
             <a href="/show-results/boolean/{{ option }}" class="link-primary"> {{ option }} </a>
         </li>
     {% endfor %}

@@ -20,23 +20,31 @@
 </head>
 <body>
 
-  {% block heading %}
-    <h1><center>{{name}}</center></h1>
-  {% endblock heading %}
-<h2> مواد مورد نیاز</h2>
+{% block heading %}
+    <h1>
+        <center>{{ name }}</center>
+    </h1>
+{% endblock heading %}
+<div class="px-3">
+    <h2> مواد مورد نیاز</h2>
+</div>
 <ul class="list-group mt-3 justify-center align-items-center px-5">
     {% for ing in ingredients %}
-        <li class="list-group-item">
+        <li class="list-group-item w-100">
             {{ ing }}
         </li>
     {% endfor %}
 </ul>
-<h2> طرز تهیه</h2>
-<span>
-{{ Preparation }}
-</span>
-<h2>لینک</h2>
-<a href="{{ url }}" class="link-primary">از اینجا با عکس بینید</a>
+<div class="px-4">
+    <h2> طرز تهیه</h2>
+    <span>
+        {{ Preparation }}
+    </span>
+</div>
+<div class="px-3">
+    <h2 class="px-3">لینک</h2>
+    <a href="{{ url }}" class="link-primary">از اینجا با عکس بینید</a>
+</div>
 
 </body>
 
