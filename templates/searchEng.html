@@ -55,11 +55,16 @@
         var text = document.getElementById("search-input").value;
         var app = document.getElementById("approach").value;
         if (text.length > 0) {
-            fetch('/next_words/' + app + '/' + text)
-                .then(response => response.text()) // convert the response to raw text
-                .then((option1) => {
-                    document.getElementById("nextwords").innerHTML = option1
-                });
+            setTimeout(() => {
+                const newText = document.getElementById("search-input").value;
+                if (newText === text) {
+                    fetch('/next_words/' + app + '/' + newText)
+                        .then(response => response.text()) // convert the response to raw text
+                        .then((option1) => {
+                            document.getElementById("nextwords").innerHTML = option1
+                        });
+                }
+            }, 1000)
         }
     }
 </script>
