@@ -47,7 +47,7 @@ categories are:
 <li> ساندویچ، پیتزا و ماکارونی،پاستا</li>
 </ul>
 
-We use a two layer fully connected as a classifier. The vectors from transformer are used as the input and the last layer specifies a distribution over classes.
+We use a two-layer fully-connected net as a classifier. The vectors from transformer are used as the input to the net and the last layer specifies a distribution over classes.
 
 ## elastic_search (ehsan)
 در ابتدا پیش‌پردازش را برا روی داده‌ها انجام می‌دهیم و سپس آن‌ها را در ایندکسی در دیتابیس الستیک ذخیره می‌کنیم.
