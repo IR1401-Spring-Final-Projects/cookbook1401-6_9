@@ -1,5 +1,7 @@
-{% if correction is None %}
-    آیا منظور شما این بود: {{ correction }}
+{% if correction is not None %}
+    آیا منظور شما این بود:
+    <a href="/show-results/{{ search }}/{{ correction }}"> {{ correction }} </a>
+
 {% endif %}
 <ul class="list-group mt-3 justify-center align-items-center px-5">
 {% for option in options %}

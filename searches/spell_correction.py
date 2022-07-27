@@ -188,15 +188,12 @@ def preprocess():
     csp = CandidateScorer(lm, cg, mu=1.0)
 
 
-
-
-
 def correct_spelling(query) -> str:
     return csp.correct_spelling(query)
 
 
-def correct_spelling_candidates(query) -> List[str]:
+def correct_spelling_candidates(query):
     correct = correct_spelling(query)
     if correct != query:
-        return [correct]
-    return []
+        return correct
+    return None
