@@ -7,7 +7,7 @@ from searches.preprocess import all_foods
 def get_imp(text):
     for i in range(10):
         text = text.split(str(i))[0]
-    for i in ['یک', 'دو', 'سه', 'چهار']:
+    for i in ['یک', 'دو', 'سه', 'چهار']+[":"]:
         text = text.split(i)[0]
     return text.split("به")[0].rstrip().lstrip()
 
