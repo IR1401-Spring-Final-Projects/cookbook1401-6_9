@@ -29,9 +29,9 @@
     <h2> مواد مورد نیاز</h2>
 </div>
 <ul class="list-group mt-3 justify-center align-items-center px-5">
-    {% for ing in ingredients %}
+    {% for ing, score in ingredients %}
         <li class="list-group-item w-100">
-            {{ ing }}
+            {{ ing }}     ({{ score }})
         </li>
     {% endfor %}
 </ul>

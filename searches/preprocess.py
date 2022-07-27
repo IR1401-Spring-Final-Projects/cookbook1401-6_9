@@ -70,6 +70,8 @@ def normalize_foods():
     global all_foods
     all_foods = all_wikis + all_mamy
     print(len(all_foods))
+    with open("searches/data/all_foods.json", "w", encoding="utf-8") as file:
+        json.dump(all_foods, file)
     return
 
 
