@@ -6,7 +6,14 @@ Persian cookbook
 its `__init__.py` run preprocesses and it is root of django project which indicate url patterns.
 
 ## FoodView 
-convert food to a html file. all urls like `/FoodView/47` ended up being handled by this part.
+
+نسخه اچ تی ام ال یک غذا را در مرورگر کاربر نمایش می دهد. برای مثال در یو آر ال `/FoodView/47` غذای
+شماره چهل و هفت ذخیره می شود.
+
+برای هر مواد غذایی، به کمک الگوریتم هاب ها و آتوریتی ها یک امتیاز به عنوان پرکاربرد بودن برای هر
+ماده غذایی نشان می دهیم. به کمک این عدد کاربر می تواند متوجه شود که هر ماده غذایی چقدر در بقیه
+غذا ها کاربرد دارد و در صورت خریداری آن، اگر مقداری برایش اضافه بماند آیا می تواند از آن به راحتی
+در بقیه غذا ها استفاده کند و یا این ماده روی دستش خواهد ماند.
 
 ## NextWords 
 this part help to predict next words in the search bar.
@@ -49,8 +56,8 @@ categories are:
 
 We use a two-layer fully-connected net as a classifier. The vectors from transformer are used as the input to the net and the last layer specifies a distribution over classes.
 
-## elastic_search 
-در ابتدا پیش‌پردازش را برا روی داده‌ها انجام می‌دهیم و سپس آن‌ها را در ایندکسی در دیتابیس الستیک ذخیره می‌کنیم.
+## elastic_search
+در ابتدا پیش‌پردازش را بر روی داده‌ها انجام می‌دهیم و سپس آن‌ها را در ایندکسی در دیتابیس الستیک ذخیره می‌کنیم.
 برای سرچ نیز وزن بیشتری به نام غذا می‌دهیم و وزن کمتری را برای تگ‌ها و مواد اولیه در‌نظر میگیریم.
 در اصل از روش function_score در الستیک استفاده کردیم. 
 
@@ -70,7 +77,5 @@ we use ParsBert. it could predict masks words. we concat several [mask] sign to 
 
 ## preprocess 
 it will preprocess food and normalizing them.
-
-
 
 
