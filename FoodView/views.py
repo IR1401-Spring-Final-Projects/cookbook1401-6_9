@@ -4,13 +4,22 @@ from django.shortcuts import render
 from searches.preprocess import all_foods
 
 
+def get_imp(text):
+    for i in range(10):
+        text = text.split(str(i))[0]
+    for i in ['یک', 'دو', 'سه', 'چهار']:
+        text = text.split(i)[0]
+    return text.split("به")[0].rstrip().lstrip()
+
+
 def get_score(scores, ingredients):
     for ingredient in ingredients:
+        ingredient2 = get_imp(ingredient)
         good = False
         for text, score in scores:
-            if text == ingredient:
+            if text == ingredient2:
                 good = True
-                yield round(score*(10**6), 1)
+                yield round(score * (10 ** 4), 2)
                 break
         if not good:
             yield -1
