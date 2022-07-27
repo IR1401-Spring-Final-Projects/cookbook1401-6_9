@@ -37,13 +37,8 @@
         <option value="classification">classification</option>
     </select>
 </div>
-<ul id="nextwords" class="list-group mt-3 justify-center align-items-center px-5">
-    {% for option in options %}
-        <li class="list-group-item w-100">
-            <a href="/show-results/boolean/{{ option }}" class="link-primary"> {{ option }} </a>
-        </li>
-    {% endfor %}
-</ul>
+<div id="nextwords">
+</div>
 <script>
     function search_func() {
         var text = document.getElementById("search-input").value;

@@ -1,5 +1,8 @@
+{% if correction %}
+<ul class="list-group mt-3 justify-center align-items-center px-5">
 {% for option in options %}
 <li class="list-group-item w-100">
     <a href="/show-results/{{ search }}/{{ option }}"> {{ option }} </a>
 </li>
 {% endfor %}
+</ul>
