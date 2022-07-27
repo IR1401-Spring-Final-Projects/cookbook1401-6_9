@@ -42,5 +42,5 @@ def preprocess():
     for c in cats.keys():
         for x in cats[c]:
             groups[x] = c
-            print(all_foods[x]['name'], end=" ")
-        print('\n------------------------------\n')
+        #     print(all_foods[x]['name'], end=" ")
+        # print('\n------------------------------\n')
