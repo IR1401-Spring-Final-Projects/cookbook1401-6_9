@@ -1,4 +1,6 @@
-{% if correction %}
+{% if correction is None %}
+    آیا منظور شما این بود: {{ correction }}
+{% endif %}
 <ul class="list-group mt-3 justify-center align-items-center px-5">
 {% for option in options %}
 <li class="list-group-item w-100">
