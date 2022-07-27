@@ -61,8 +61,8 @@ def classify_transformer_text(text):
     return "WTF?"
 
 
-def evaluate(dev_set, classifier):
-    classifier.eval()
+def evaluate(dev_set):
+    trained_classifier.eval()
     n = len(dev_set)
     feature_size = 768
     batch_x = torch.zeros(n, feature_size)
@@ -71,10 +71,10 @@ def evaluate(dev_set, classifier):
         r = dev_set[i]
         batch_x[i] = vecs[r]
         batch_y[i] = all_foods[r]["label"]
-    output = classifier(batch_x)
+    output = trained_classifier(batch_x)
     output = torch.argmax(output, 1)
     print("dev set accuracy:", (torch.sum(output == batch_y) / 100).item())
-    classifier.train()
+    trained_classifier.eval()
 
 
 def train_model(training_set, dev_set):
@@ -129,4 +129,4 @@ def preprocess():
     # train_model(training_set, dev_set)
     trained_classifier = NN()
     trained_classifier.load_state_dict(torch.load("searches/data/classifier.pt"))
-    evaluate(dev_set, trained_classifier)
+    evaluate(dev_set)
