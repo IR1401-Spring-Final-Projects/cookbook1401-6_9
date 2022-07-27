@@ -36,7 +36,7 @@ searches from HW3
 we use transformer as word2vec model this time and improve our results. 
 by searching a text with this approach, system will initially search by transformer and concat the highest score food with 100 random food from its cluster. 
 
-## classification (Ali)
+## classification 
 we use transformer as word2vec model and train a decision tree on top, to classify foods in 5 different category. 
 categories are: 
 <ul>
@@ -49,14 +49,14 @@ categories are:
 
 We use a two-layer fully-connected net as a classifier. The vectors from transformer are used as the input to the net and the last layer specifies a distribution over classes.
 
-## elastic_search (ehsan)
+## elastic_search 
 در ابتدا پیش‌پردازش را برا روی داده‌ها انجام می‌دهیم و سپس آن‌ها را در ایندکسی در دیتابیس الستیک ذخیره می‌کنیم.
 برای سرچ نیز وزن بیشتری به نام غذا می‌دهیم و وزن کمتری را برای تگ‌ها و مواد اولیه در‌نظر میگیریم.
 در اصل از روش function_score در الستیک استفاده کردیم. 
 
 ## next words prediction
 by getting a text it tries to find a query for users.
-### typo (Mahdi)
+### typo 
 
 A language model is created and used for probability of words.
 
